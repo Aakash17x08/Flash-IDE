@@ -5,7 +5,7 @@ Flash IDE is a sleek, responsive, and developer-friendly online code editor buil
 ## 🚀 Live Demo
 [flash-ide.netlify.app](https://flash-ide.netlify.app)
 
-![Flash IDE Preview](./ide/src/assets/Screenshot%202025-04-15%20232030.png) <!-- Replace this with your screenshot if available -->
+![Flash IDE Preview](./src/assets/Screenshot%202025-04-15%20232030.png) <!-- Replace this with your screenshot if available -->
 
 ---
 
