@@ -64,7 +64,7 @@ Follow these steps to run Flash IDE locally:
 
 ```bash
 # Clone the repository
-git clone https://github.com/Aakash17x08/flash-ide.git
+git clone https://github.com/Aakash17x08/Flash-IDE.git
 cd flash-ide
 
 # Install dependencies
