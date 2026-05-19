@@ -80,7 +80,7 @@ app.get("/api/models", async (req, res) => {
 });
 
 // Wildcard route to serve the React app index.html
-app.get("*", (req, res) => {
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, "../ide/dist/index.html"));
 });
 
