@@ -2,13 +2,21 @@ import express from "express";
 import cors from "cors";
 import axios from "axios";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// Serve static assets from the React frontend build
+app.use(express.static(path.join(__dirname, "../ide/dist")));
 
 app.post("/api/gemini", async (req, res) => {
   try {
@@ -33,6 +41,13 @@ app.post("/api/gemini", async (req, res) => {
             parts: [{ text: prompt }],
           },
         ],
+        systemInstruction: {
+          parts: [
+            {
+              text: "You are a helpful coding assistant integrated into Flash IDE. When the user asks for code changes, you must ALWAYS wrap any code output (full files or snippets) in standard GFM markdown code blocks with the correct language identifier (e.g. ```html, ```css, ```javascript). Never return code without wrapping it in markdown code blocks."
+            }
+          ]
+        }
       }
     );
 
@@ -51,8 +66,6 @@ app.post("/api/gemini", async (req, res) => {
   }
 });
 
-app.listen(5000, () => console.log("Backend running at http://localhost:5000"));
-
 // Debug helper: list available models from the Generative Language API
 app.get("/api/models", async (req, res) => {
   try {
@@ -65,3 +78,11 @@ app.get("/api/models", async (req, res) => {
     res.status(500).json({ error: "Failed to list models" });
   }
 });
+
+// Wildcard route to serve the React app index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../ide/dist/index.html"));
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

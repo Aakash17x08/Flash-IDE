@@ -1,0 +1,13 @@
+{
+  "name": "flash-ide-workspace",
+  "version": "1.0.0",
+  "description": "Flash IDE combined project deployment configurations",
+  "scripts": {
+    "install-all": "npm install --prefix backend && npm install --prefix ide",
+    "build": "npm run build --prefix ide",
+    "start": "node backend/index.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
